@@ -325,59 +325,118 @@ document.addEventListener('DOMContentLoaded', () => {
     let slideIndex = 1;
 
 
-    if (slides.length < 10) {
-        total.textContet = `0${slides.lenght}`;
-    } else {
-        total.textContet = slides.lenght;
-    }
+    // if (slides.length < 10) {
+    //     total.textContet = `0${slides.lenght}`;
+    // } else {
+    //     total.textContet = slides.lenght;
+    // }
 
-    showSlides(slideIndex);
+    // showSlides(slideIndex);
 
-    function showSlides(n) {
-        if (n > slides.length) {
-            slideIndex = 1;
-        }
+    // function showSlides(n) {
+    //     if (n > slides.length) {
+    //         slideIndex = 1;
+    //     }
 
-        if (n < 1) {
-            slideIndex = slides.length;
-        }
+    //     if (n < 1) {
+    //         slideIndex = slides.length;
+    //     }
 
-        slides.forEach(item => item.classList.add('hide'));
 
-        slides[slideIndex - 1].classList.remove('hide');
-        // slides[slideIndex - 1].classList.add('show');
+    //     slides.forEach(item => {
+    //         item.classList.remove('show');
+    //         item.classList.add('hide');
+    //     });
+
+    //     slides[slideIndex - 1].classList.remove('hide');
+    //     slides[slideIndex - 1].classList.add('show');
+
+    //     if (slides.length < 10) {
+    //         current.textContent =`0${slideIndex}`;
+    //     } else {
+    //         current.textContent =slideIndex;
+    //     }
+    // }
+
+
+
+    // function plusSlide(n) {
+    //     showSlides(slideIndex += n);
+    // }
+
+    // nextSlide.addEventListener('click', () => {
+    //     plusSlide(1);    
+    // });
+
+    // prevSlide.addEventListener('click', () => {
+    //     plusSlide(-1);
+    // });
+
+    //2 option
+    const slidesWrapper = document.querySelector('.offer__slider-wrapper'),
+        slidesField = document.querySelector('.offer__slider-inner'),
+        width = window.getComputedStyle(slidesWrapper).width;
+
+        let offset = 0;
 
         if (slides.length < 10) {
-            current.textContent =`0${slideIndex}`;
+            total.textContet = `0${slides.lenght}`;
+            current.textContent = `0${slideIndex}`;
         } else {
-            current.textContent =`0${slideIndex}`;
+            total.textContet = slides.lenght;
+            current.textContent = slideIndex;
         }
-    }
+        
 
 
-
-    function plusSlide(n) {
-        showSlides(slideIndex += n);
-    }
-
-    nextSlide.addEventListener('click', () => {
-        plusSlide(1);
+    slidesField.style.width = 100 * slides.length + '%';
+    slides.forEach(item =>{
+        item.style.width = width;
     });
 
-    prevSlide.addEventListener('click', () => {
-        plusSlide(-1);
+    nextSlide.addEventListener('click', ()=>{
+        if(offset == +width.slice(0, width.length -2) * (slides.length -1)){
+            offset = 0;
+        }else{
+            offset += +width.slice(0, width.length -2);
+        }
+
+        slidesField.style.transform = `translateX(-${offset}px)`;
+        
+        if(slideIndex == slides.length){
+            slideIndex =1;
+        }else{
+            slideIndex++;
+        }
+
+        if(slides.length <10){
+            current.textContent =`0${slideIndex}`;
+        }else{
+            current.textContent = slideIndex;
+        }
+
     });
+    prevSlide.addEventListener('click', () =>{
+        if(offset == 0){
+            offset = +width.slice(0, width.length -2) * (slides.length-1);
+        }else{
+            offset -= +width.slice(0, width.length -2);
+        }
 
-    // function showSlide(slide, i=0) {
-    //     hideSlides(slides);
-    //     slide[i].classList.remove('hide');
-    //     slide[i].classList.add('show');
+        slidesField.style.transform = `translateX(-${offset}px)`;
+       
+        if(slideIndex == 1){
+            slideIndex = slides.length;
+        }else{
+            slideIndex--;
+        }
 
+        if(slides.length <10){
+            current.textContent =`0${slideIndex}`;
+        }else{
+            current.textContent = slideIndex;
+        }
 
-    // }
-
-    // function nextSlide(){
-
-    // }
+    });
 
 });
