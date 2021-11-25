@@ -317,107 +317,114 @@ document.addEventListener('DOMContentLoaded', () => {
         total = document.querySelector('#total'),
         slidesWrapper = document.querySelector('.offer__slider-wrapper'),
         slidesField = document.querySelector('.offer__slider-inner'),
-        parentSlider = document.querySelector('.offer__slider'),
+        slider = document.querySelector('.offer__slider'),
 
         width = window.getComputedStyle(slidesWrapper).width;
 
-        
-        
-        let slideIndex = 1;
 
-        let offset = 0;
-        
+
+    let slideIndex = 1;
+
+    let offset = 0;
+
+    function showCurrentTotalWithZero(parent , index){
         if (slides.length < 10) {
-            total.textContet = `0${slides.lenght}`;
-            current.textContent = `0${slideIndex}`;
+            total.textContet = `0${parent}`;
+            current.textContent = `0${index}`;
         } else {
-            total.textContet = slides.lenght;
-            current.textContent = slideIndex;
+            total.textContet = parent;
+            current.textContent = index;
         }
-        
+    }   
 
+    function dotsArrOpocity(){
+        dotsArr.forEach(dot => dot.style.opacity = '.5');
+        dotsArr[slideIndex-1].style.opacity = 1;
+    }
 
     slidesField.style.width = 100 * slides.length + '%';
-    slides.forEach(item =>{
+
+    slides.forEach(item => {
         item.style.width = width;
     });
+    
+    // slide Navigation start /
+    const indicators = document.createElement('ol'),
+          dotsArr = [];
 
-    nextSlide.addEventListener('click', ()=>{
-        if(offset == +width.slice(0, width.length -2) * (slides.length -1)){
+    indicators.classList.add('carousel-indicators');
+
+    slider.append(indicators);
+
+    for (let i = 0; i < slides.length; i++) {
+        const dot = document.createElement('li');
+
+        dot.setAttribute('data-slide-to', i + 1);
+        dot.classList.add('dot');
+
+        if(i == 0 ){
+            dot.style.opacity = 1;
+        }
+
+        indicators.append(dot);
+        dotsArr.push(dot);
+
+    }
+    //end slide Navigation finisher/  
+
+    nextSlide.addEventListener('click', () => {
+        if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
             offset = 0;
-        }else{
-            offset += +width.slice(0, width.length -2);
+        } else {
+            offset += +width.slice(0, width.length - 2);
         }
 
         slidesField.style.transform = `translateX(-${offset}px)`;
-        
-        if(slideIndex == slides.length){
-            slideIndex =1;
-        }else{
+
+        if (slideIndex == slides.length) {
+            slideIndex = 1;
+        } else {
             slideIndex++;
         }
 
-        if(slides.length <10){
-            current.textContent =`0${slideIndex}`;
-        }else{
-            current.textContent = slideIndex;
-        }
+        showCurrentTotalWithZero(slides.lenght, slideIndex);
 
+        dotsArrOpocity();
 
     });
 
-    prevSlide.addEventListener('click', () =>{
-        if(offset == 0){
-            offset = +width.slice(0, width.length -2) * (slides.length-1);
-        }else{
-            offset -= +width.slice(0, width.length -2);
+    prevSlide.addEventListener('click', () => {
+        if (offset == 0) {
+            offset = +width.slice(0, width.length - 2) * (slides.length - 1);
+        } else {
+            offset -= +width.slice(0, width.length - 2);
         }
 
         slidesField.style.transform = `translateX(-${offset}px)`;
-       
-        if(slideIndex == 1){
+
+        if (slideIndex == 1) {
             slideIndex = slides.length;
-        }else{
+        } else {
             slideIndex--;
         }
 
-        if(slides.length <10){
-            current.textContent =`0${slideIndex}`;
-        }else{
-            current.textContent = slideIndex;
-        }
+        showCurrentTotalWithZero(slides.lenght, slideIndex);
 
+        dotsArrOpocity();
+    });
+    dotsArr.forEach(dot =>{
+        dot.addEventListener('click', (event)=>{
+            const slideTo = event.target.getAttribute('data-slide-to');
+
+            slideIndex = slideTo;
+
+            offset = +width.slice(0, width.length - 2) * (slideTo-1);
+
+            showCurrentTotalWithZero(slides.lenght, slideIndex);
+            dotsArrOpocity();
+
+            slidesField.style.transform = `translateX(-${offset}px)`;
+        });
     });
 
-    // Slider navigation
-
-
-    const borderDiv = document.createElement('div');
-    borderDiv.style.marginRight = 'auto';
-    borderDiv.style.marginLeft = 'auto'; 
-    borderDiv.style.marginTop = '15px'; 
-    borderDiv.style.display = 'flex';
-    
-    for(let i = 0; i < slides.length; i++){
-        const newDot =document.createElement('div');
-        newDot.classList.add('dot');
-        newDot.textContent = i+1;
-        borderDiv.append(newDot);
-
-        newDot.addEventListener('click', ()=>{
-                offset = +width.slice(0, width.length -2)* i;
-                
-                if(slides.length <10){
-                    current.textContent =`0${i+1}`;
-                }else{
-                    current.textContent = i;
-                }
-                slidesField.style.transform = `translateX(-${offset}px)`;
-
-        });
-
-
-    }
-
-    parentSlider.append(borderDiv);
 });
