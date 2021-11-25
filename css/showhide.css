@@ -20,3 +20,14 @@
     margin: 0 auto;
     margin-top: 10px;
 }
+
+.offer__slider-inner{
+    transition: 0.5s all;
+    display: flex;
+    
+}
+
+.offer__slider-wrapper{
+    overflow: hidden;
+    transform: translate();
+}
