@@ -321,7 +321,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         width = window.getComputedStyle(slidesWrapper).width;
 
-
+    function deleteNotDigits(str){
+        return +str.replace(/\D/g, '');
+    }
 
     let slideIndex = 1;
 
@@ -372,11 +374,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     //end slide Navigation finisher/  
 
+    
+
     nextSlide.addEventListener('click', () => {
-        if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
+        if (offset == deleteNotDigits(width) * (slides.length - 1)) {
             offset = 0;
         } else {
-            offset += +width.slice(0, width.length - 2);
+            offset += deleteNotDigits(width);
         }
 
         slidesField.style.transform = `translateX(-${offset}px)`;
@@ -395,9 +399,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     prevSlide.addEventListener('click', () => {
         if (offset == 0) {
-            offset = +width.slice(0, width.length - 2) * (slides.length - 1);
+            offset = deleteNotDigits(width) * (slides.length - 1);
         } else {
-            offset -= +width.slice(0, width.length - 2);
+            offset -= deleteNotDigits(width);
         }
 
         slidesField.style.transform = `translateX(-${offset}px)`;
@@ -418,7 +422,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             slideIndex = slideTo;
 
-            offset = +width.slice(0, width.length - 2) * (slideTo-1);
+            offset = deleteNotDigits(width) * (slideTo-1);
 
             showCurrentTotalWithZero(slides.lenght, slideIndex);
             dotsArrOpocity();
