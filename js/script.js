@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         width = window.getComputedStyle(slidesWrapper).width;
 
-    function deleteNotDigits(str){
+    function deleteNotDigits(str) {
         return +str.replace(/\D/g, '');
     }
 
@@ -329,7 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let offset = 0;
 
-    function showCurrentTotalWithZero(parent , index){
+    function showCurrentTotalWithZero(parent, index) {
         if (slides.length < 10) {
             total.textContet = `0${parent}`;
             current.textContent = `0${index}`;
@@ -337,11 +337,11 @@ document.addEventListener('DOMContentLoaded', () => {
             total.textContet = parent;
             current.textContent = index;
         }
-    }   
+    }
 
-    function dotsArrOpocity(){
+    function dotsArrOpocity() {
         dotsArr.forEach(dot => dot.style.opacity = '.5');
-        dotsArr[slideIndex-1].style.opacity = 1;
+        dotsArr[slideIndex - 1].style.opacity = 1;
     }
 
     slidesField.style.width = 100 * slides.length + '%';
@@ -349,10 +349,10 @@ document.addEventListener('DOMContentLoaded', () => {
     slides.forEach(item => {
         item.style.width = width;
     });
-    
+
     // slide Navigation start /
     const indicators = document.createElement('ol'),
-          dotsArr = [];
+        dotsArr = [];
 
     indicators.classList.add('carousel-indicators');
 
@@ -364,7 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dot.setAttribute('data-slide-to', i + 1);
         dot.classList.add('dot');
 
-        if(i == 0 ){
+        if (i == 0) {
             dot.style.opacity = 1;
         }
 
@@ -374,7 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     //end slide Navigation finisher/  
 
-    
+
 
     nextSlide.addEventListener('click', () => {
         if (offset == deleteNotDigits(width) * (slides.length - 1)) {
@@ -416,13 +416,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         dotsArrOpocity();
     });
-    dotsArr.forEach(dot =>{
-        dot.addEventListener('click', (event)=>{
+    dotsArr.forEach(dot => {
+        dot.addEventListener('click', (event) => {
             const slideTo = event.target.getAttribute('data-slide-to');
 
             slideIndex = slideTo;
 
-            offset = deleteNotDigits(width) * (slideTo-1);
+            offset = deleteNotDigits(width) * (slideTo - 1);
 
             showCurrentTotalWithZero(slides.lenght, slideIndex);
             dotsArrOpocity();
@@ -430,5 +430,78 @@ document.addEventListener('DOMContentLoaded', () => {
             slidesField.style.transform = `translateX(-${offset}px)`;
         });
     });
+
+    // Calculator
+    const result = document.querySelector('.calculating__result span');
+
+    let sex ="female", height, weight, age, ratio='1.375';
+
+
+
+    function calcTotalCal() {
+        if (!sex || !height || !weight || !age || !ratio) {
+            result.textContent = "____";
+            return;
+        }
+        if (sex === 'female') {
+            result.textContent = Math.round((447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age)) * ratio);
+        } else {
+            result.textContent = Math.round((88.36 + (13.4 * weight) + (4.8 * height) - (5.7 * age)) * ratio);
+        }
+    }
+
+    calcTotalCal();
+
+    function getStaticInfo(parentSelector, activeClass) {
+        const elemnets = document.querySelectorAll(`${parentSelector} div`);
+
+        elemnets.forEach((elem) => {
+            elem.addEventListener('click', (event) => {
+
+                if (event.target.getAttribute('data-ratio')) {
+                    ratio = +event.target.getAttribute('data-ratio');
+                } else {
+                    sex = event.target.getAttribute('id');
+                }
+                // console.log(sex, ratio);
+
+                elemnets.forEach(elem => {
+                    elem.classList.remove(activeClass);
+                });
+
+                event.target.classList.add(activeClass);
+                calcTotalCal();
+            });
+
+        });
+
+    }
+    getStaticInfo('#gender', 'calculating__choose-item_active');
+    getStaticInfo('.calculating__choose_big', 'calculating__choose-item_active');
+
+    function getDinamicInfo(selector) { // input age weight and height
+        const input = document.querySelector(selector);
+
+        input.addEventListener('input', () => {
+            switch (input.getAttribute('id')) {
+                case "height":
+                    height = +input.value;
+                    break;
+
+                case "weight":
+                    weight = +input.value;
+                    break;
+
+                case "age":
+                    age = +input.value;
+                    break;
+            }
+
+            calcTotalCal();
+        });
+    }
+    getDinamicInfo('#height');
+    getDinamicInfo('#weight');
+    getDinamicInfo('#age');
 
 });
