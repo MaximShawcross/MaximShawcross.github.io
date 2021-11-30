@@ -466,6 +466,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    
     initLocalSettings('#gender div', 'calculating__choose-item_active');
     initLocalSettings('.calculating__choose_big div', 'calculating__choose-item_active');
 
@@ -541,8 +542,9 @@ document.addEventListener('DOMContentLoaded', () => {
             calcTotalCal();
         });
     }
+
     getDinamicInfo('#height');
     getDinamicInfo('#weight');
     getDinamicInfo('#age');
-
+    
 });
