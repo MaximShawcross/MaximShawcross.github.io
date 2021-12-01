@@ -546,5 +546,5 @@ document.addEventListener('DOMContentLoaded', () => {
     getDinamicInfo('#height');
     getDinamicInfo('#weight');
     getDinamicInfo('#age');
-    
+    // 0.5 
 });
