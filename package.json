@@ -20,7 +20,19 @@
     "url": "https://github.com/MaximShawcross/goodfoodelivery/issues"
   },
   "homepage": "https://github.com/MaximShawcross/goodfoodelivery#readme",
+  "browserslist": [
+    "> 1%"
+  ],
   "devDependencies": {
+    "@babel/cli": "^7.16.7",
+    "@babel/core": "^7.16.7",
+    "@babel/preset-env": "^7.16.7",
+    "babel-loader": "^8.2.3",
+    "core-js": "^3.20.2",
     "json-server": "^0.17.0"
+  },
+  "dependencies": {
+    "es6-promise": "^4.2.8",
+    "nodelist-foreach-polyfill": "^1.2.0"
   }
 }
