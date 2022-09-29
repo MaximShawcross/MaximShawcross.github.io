@@ -46,7 +46,7 @@ function cards() {
     // newCard.render();
 
 
-    axios.get('http://localhost:3000/menu')
+    axios.get('https://maximshawcross.github.io/goodfooddelivery/menu')
         .then((data) => {
             data.data.forEach(function ({
                 img,
