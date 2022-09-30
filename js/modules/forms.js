@@ -74,7 +74,7 @@ function forms(formSelector, timerId) {
             closeModal('.modal');
         }, 400);
 
-        fetch('http://localhost:3000/menu')
+        fetch('https://food-delivery-native.herokuapp.com/api/menu')
             .then(data => data.json());
         // .then(res => console.log(res));
     }
