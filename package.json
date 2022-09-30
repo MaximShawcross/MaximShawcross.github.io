@@ -4,6 +4,8 @@
   "description": "Good food delivery",
   "main": "\t",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/MaximShawcross/goodfoodelivery/issues"
   },
-  "homepage": "https://github.com/MaximShawcross/goodfoodelivery#readme",
+  "homepage": "http://<github-username>.github.io/<repo-name>",
   "browserslist": [
     "> 1%"
   ],
