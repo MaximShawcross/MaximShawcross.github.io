@@ -42,11 +42,9 @@ function cards() {
         }
 
     }
-    // const newCard = new CardCreate();
-    // newCard.render();
 
 
-    axios.get('https://maximshawcross.github.io/goodfooddelivery/api/menu')
+    axios.get('https://my-json-server.typicode.com/maximshawcross/server-for-good-food-deliry/menu')
         .then((data) => {
             data.data.forEach(function ({
                 img,

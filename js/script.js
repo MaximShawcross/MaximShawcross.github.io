@@ -14,7 +14,7 @@ import {showModal} from './modules/modals';
 document.addEventListener('DOMContentLoaded', () => {
 
     const timerId = setTimeout(() => showModal('.modal', timerId), 30000);
-
+    //pls 
     tabs('.tabheader__item', '.tabcontent', '.tabheader__items', 'tabheader__item_active');
     modal('[data-modal]', '.modal', timerId);
     timer('.timer', '2022-11-12');
