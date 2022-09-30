@@ -42,10 +42,8 @@ function cards() {
         }
 
     }
-    // const newCard = new CardCreate();
-    // newCard.render();
 
-
+    // one more change
     axios.get('https://my-json-server.typicode.com/maximShawcross/goodfooddelivery/menu')
         .then((data) => {
             data.data.forEach(function ({
