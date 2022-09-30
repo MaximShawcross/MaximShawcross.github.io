@@ -1,7 +1,7 @@
 {
-  "name": "food",
-  "version": "1.0.0",
-  "description": "some description",
+  "name": "Food-shop",
+  "version": "1.0.1",
+  "description": "Good food delivery",
   "main": "\t",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,7 +14,7 @@
     "some",
     "keyWords"
   ],
-  "author": "Me",
+  "author": "MaximShawcross",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/MaximShawcross/goodfoodelivery/issues"
@@ -29,7 +29,9 @@
     "@babel/preset-env": "^7.16.7",
     "babel-loader": "^8.2.3",
     "core-js": "^3.20.2",
-    "json-server": "^0.17.0"
+    "json-server": "^0.17.0",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
   },
   "dependencies": {
     "es6-promise": "^4.2.8",
