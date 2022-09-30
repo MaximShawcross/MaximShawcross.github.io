@@ -44,7 +44,7 @@ function cards() {
     }
 
     // one more change
-    axios.get('https://my-json-server.typicode.com/maximShawcross/goodfooddelivery/menu')
+    axios.get('https://food-delivery-native.herokuapp.com/api/menu')
         .then((data) => {
             data.data.forEach(function ({
                 img,
